@@ -985,7 +985,7 @@ import {
       if (!config.show.scale_tickmarks) return;
       
       const scaleDelta = (config.horseshoe_scale.max - config.horseshoe_scale.min);
-      const absoluteMin=  Math.abs(config.horseshoe_scale.min);
+      const absoluteMin=  Math.abs(config.horseshoe_scale.max);
       const absoluteMax = scaleDelta + absoluteMin;
       
       const stroke = config.horseshoe_scale.color ? config.horseshoe_scale.color : 'var(--primary-background-color)';
