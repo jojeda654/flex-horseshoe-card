@@ -990,7 +990,7 @@ import {
       
       const stroke = config.horseshoe_scale.color ? config.horseshoe_scale.color : 'var(--primary-background-color)';
       const tickSize = config.horseshoe_scale.ticksize ? config.horseshoe_scale.ticksize
-                      : (scaleDelta) / 10
+                      : (scaleDelta) / 10;
       
       // fullScale is 260 degrees. Hard coded for now...
       const fullScale = 260;
