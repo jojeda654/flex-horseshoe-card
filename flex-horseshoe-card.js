@@ -983,25 +983,29 @@ import {
       if (!config) return;
       if (!config.show) return;
       if (!config.show.scale_tickmarks) return;
+    
+      const scaleDelta = (config.horseshoe_scale.max - config.horseshoe_scale.min);
+      const absoluteMin =  Math.abs(config.horseshoe_scale.max);
+      const absoluteMax = absoluteMin + scaleDelta;
       
       const stroke = config.horseshoe_scale.color ? config.horseshoe_scale.color : 'var(--primary-background-color)';
       const tickSize = config.horseshoe_scale.ticksize ? config.horseshoe_scale.ticksize
-                      : (config.horseshoe_scale.max - config.horseshoe_scale.min) / 15;
+                      : (absoluteMax - absoluteMin) / 10;
       
       // fullScale is 260 degrees. Hard coded for now...
       const fullScale = 260;
-      const remainder = config.horseshoe_scale.min % tickSize;
-      const startTickValue = config.horseshoe_scale.min + (remainder == 0 ? 0 : (tickSize - remainder));
-      const startAngle = ((startTickValue - config.horseshoe_scale.min) /
-                          (config.horseshoe_scale.max - config.horseshoe_scale.min)) * fullScale;
-      var tickSteps = ((config.horseshoe_scale.max - startTickValue) / tickSize);
+      const remainder = absoluteMin % tickSize;
+      const startTickValue = absoluteMin + (remainder == 0 ? 0 : (tickSize - remainder));
+      const startAngle = ((startTickValue - absoluteMin) /
+                          (absoluteMax - absoluteMin)) * fullScale;
+      var tickSteps = ((absoluteMax - startTickValue) / tickSize);
       
       // new
       var steps = Math.floor(tickSteps);
       const angleStepSize = (fullScale - startAngle) / tickSteps;
       
       // If steps exactly match the max. value/range, add extra step for that max value.
-      if ((Math.floor(((steps) * tickSize) + startTickValue)) <= (config.horseshoe_scale.max)) {steps++;}
+      if ((Math.floor(((steps) * tickSize) + startTickValue)) <= (absoluteMax)) {steps++;}
       
       const radius = config.horseshoe_scale.width ? config.horseshoe_scale.width / 2 : 6/2;
       var angle;
