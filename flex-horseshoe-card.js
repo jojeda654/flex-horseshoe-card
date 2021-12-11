@@ -1015,7 +1015,7 @@ import {
     // Value of -230 is weird. Should be -220. Can't find why...
       var i;
       for (i = 0; i < steps; i++) {
-        angle = (startAngle * Math.PI / 180) + ((-230 + (360 - i*angleStepSize)) * Math.PI / 180);
+        angle = (startAngle * Math.PI / 180) + ((-220 + (360 - i*angleStepSize)) * Math.PI / 180);
         scaleItems[i] = svg`
           <circle cx="${50 + 50 - Math.sin(angle)*TICKMARKS_RADIUS_SIZE}"
                   cy="${50 + 50 - Math.cos(angle)*TICKMARKS_RADIUS_SIZE}" r="${radius}"
